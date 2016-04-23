@@ -162,7 +162,7 @@ Matter.Events.on(engine, 'collisionStart', function(event) {
     collidingRocket = event.pairs[0].bodyA;
   }
 
-  if(collidingRocket.state === "fall") {
+  if(collidingRocket.state === 'fall' || collidingRocket.state === 'burn') {
     if (collidingRocket === rocket1) {
       document.getElementById("stats").innerHTML += "<br>rocket1 impact velocity: " + collidingRocket.speed;
     } else if (collidingRocket === rocket2) {
@@ -186,7 +186,7 @@ Matter.Events.on(engine, 'collisionStart', function(event) {
 
 Events.on(engine.render, "afterRender", function(event) {
   engine.render.context.globalCompositeOperation = 'destination-over';
-  
+
   //draw cropped background on the whole canvas
   var destX = 0;
   var destY = 0;
