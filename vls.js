@@ -160,6 +160,8 @@ Matter.Events.on(engine, 'collisionStart', function(event) {
 
   if (collidingRocket.speed >= impactVelocityThreshold) {
     collidingRocket.render.sprite.texture = "http://data.whicdn.com/images/32155824/original.png";
+    Body.setAngle(collidingRocket, 0);
+    Sleeping.set(collidingRocket, true);
     collidingRocket.render.sprite.xScale = 0.15;
     collidingRocket.render.sprite.yScale = 0.75;
   }
