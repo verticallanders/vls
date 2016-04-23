@@ -56,7 +56,8 @@ function initRockets() {
 initRockets();
 
 // 1600 are 2560 are height and width of the background image
-var ground = Bodies.rectangle(0, 1600, 2500, 10, {
+var groundWidth = 10
+var ground = Bodies.rectangle(0, 1600-2*groundWidth, 2500, groundWidth, {
   isStatic: true
 });
 ground.render.fillStyle = "#4d2600";
