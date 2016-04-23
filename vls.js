@@ -53,6 +53,8 @@ initRockets();
 var ground = Bodies.rectangle(0, 1600, 2560, 10, {
   isStatic: true
 });
+ground.render.fillStyle = "#4d2600";
+ground.render.strokeStyle = "#4d2600";
 
 
 // add all of the bodies to the world
