@@ -57,6 +57,8 @@ initRockets();
 var ground = Bodies.rectangle(0, 1600, 2560, 10, {
   isStatic: true
 });
+ground.render.fillStyle = "#4d2600";
+ground.render.strokeStyle = "#4d2600";
 
 
 // add all of the bodies to the world
@@ -164,6 +166,10 @@ Matter.Events.on(engine, 'collisionStart', function(event) {
 
   if (collidingRocket.speed >= impactVelocityThreshold) {
     collidingRocket.render.sprite.texture = explosionSprite;
+
+    Body.setAngle(collidingRocket, 0);
+    Sleeping.set(collidingRocket, true);
+
     collidingRocket.render.sprite.xScale = 0.15;
     collidingRocket.render.sprite.yScale = 0.75;
   }
