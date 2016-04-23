@@ -1,0 +1,12 @@
+body {
+    color: white;
+    background: black;
+    font-family: AppleGothic, "Century Gothic", Muli, "Avant Garde", sans-serif;
+
+}
+
+#earth_pano {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+}
