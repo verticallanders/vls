@@ -62,6 +62,7 @@ function initRockets() {
   rocket1.drag_area = 0.00001;
   rocket2.drag_coeff = drag_coeff;
   rocket2.drag_area = 0.00001;
+  burn_y = ground_top - burn_alt;
 }
 
 
