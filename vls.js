@@ -21,18 +21,22 @@ var engine = Engine.create({
 
 // global constants
 var impactVelocityThreshold = 15.; // extremely arbitrary
+var bgImageUrl = "img/stars.jpg";
+var staticRocketSprite = "img/static_rocket.png";
+var fieryRocketSprite =  "img/fiery_rocket.png";
+var explosionSprite = "img/boom.png";
 
 // preload the background image
 var imageObj = new Image();
-imageObj.src = "https://adamday84.files.wordpress.com/2013/02/stars.jpg";
+imageObj.src = bgImageUrl;
 
 // create two boxes and a ground
-var rocket1 = Bodies.rectangle(300, 350, 25, 80);
-var rocket2 = Bodies.rectangle(500, 350, 25, 80);
+var rocket1 = Bodies.rectangle(300, 350, 25, 72);
+var rocket2 = Bodies.rectangle(500, 350, 25, 72);
 
 function initRockets() {
   Body.setPosition(rocket1, {x: 300, y: 350});
-  rocket1.render.sprite.texture = "http://s31.postimg.org/vgiq8xqkn/static_rocket.png";
+  rocket1.render.sprite.texture = staticRocketSprite;
   rocket1.render.sprite.xScale = 1.;
   rocket1.render.sprite.yScale = 1.;
   rocket1.state = "fall";
@@ -40,7 +44,7 @@ function initRockets() {
   Body.setAngularVelocity(rocket1, 0.2);
 
   Body.setPosition(rocket2, {x: 500, y: 350});
-  rocket2.render.sprite.texture = "http://s31.postimg.org/vgiq8xqkn/static_rocket.png";
+  rocket2.render.sprite.texture = staticRocketSprite;
   rocket2.render.sprite.xScale = 1.;
   rocket2.render.sprite.yScale = 1.;
   rocket2.state = "start";
@@ -91,13 +95,13 @@ Events.on(engine, 'beforeUpdate', function() {
     if (rocket2.position.y > burn_y) {
       rocket2.burn_start_time = engine.timing.timestamp;
       rocket2.state = "burn";
-      rocket2.render.sprite.texture = "https://cdn4.iconfinder.com/data/icons/whsr-january-flaticon-set/128/rocket.png";
+      rocket2.render.sprite.texture = fieryRocketSprite;
     }
   } else if (rocket2.state === "burn") {
     applyDrag(rocket2);
     if (engine.timing.timestamp - rocket2.burn_start_time >= burn_duration * 1000) {
       rocket2.state = "fall";
-      rocket2.render.sprite.texture = "http://s31.postimg.org/vgiq8xqkn/static_rocket.png";
+      rocket2.render.sprite.texture = staticRocketSprite;
     } else {
       Body.applyForce(rocket2, rocket2.position, {
         x: 0,
@@ -159,7 +163,7 @@ Matter.Events.on(engine, 'collisionStart', function(event) {
   }
 
   if (collidingRocket.speed >= impactVelocityThreshold) {
-    collidingRocket.render.sprite.texture = "http://data.whicdn.com/images/32155824/original.png";
+    collidingRocket.render.sprite.texture = explosionSprite;
     collidingRocket.render.sprite.xScale = 0.15;
     collidingRocket.render.sprite.yScale = 0.75;
   }
