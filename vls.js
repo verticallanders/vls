@@ -38,6 +38,8 @@ function initRockets() {
   rocket1.state = "fall";
   Sleeping.set(rocket1, false);
   Body.setAngularVelocity(rocket1, 0.2);
+  Body.setVelocity(rocket1, {x: 0, y: 20});
+  Body.setVelocity(rocket2, {x: 0, y: 20});
 
   Body.setPosition(rocket2, {x: 500, y: 350});
   rocket2.render.sprite.texture = "http://s31.postimg.org/vgiq8xqkn/static_rocket.png";
