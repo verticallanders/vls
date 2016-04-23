@@ -56,7 +56,7 @@ function initRockets() {
 initRockets();
 
 // 1600 are 2560 are height and width of the background image
-var ground = Bodies.rectangle(0, 1600, 2560, 10, {
+var ground = Bodies.rectangle(0, 1600, 1003, 10, {
   isStatic: true
 });
 ground.render.fillStyle = "#4d2600";
@@ -179,8 +179,9 @@ Matter.Events.on(engine, 'collisionStart', function(event) {
 });
 
 Events.on(engine.render, "afterRender", function(event) {
-  //draw cropped background on the whole canvas
   engine.render.context.globalCompositeOperation = 'destination-over';
+  
+  //draw cropped background on the whole canvas
   var destX = 0;
   var destY = 0;
   var destWidth = engine.render.canvas.width;
@@ -189,8 +190,8 @@ Events.on(engine.render, "afterRender", function(event) {
   // by cropping the source rectangle
   var sourceX = engine.render.bounds.min.x;
   var sourceY = engine.render.bounds.min.y;
-  var sourceWidth = destWidth; //image w 2560;
-  var sourceHeight = destHeight; //image h 1600;
+  var sourceWidth = destWidth;
+  var sourceHeight = destHeight;
 
   engine.render.context.drawImage(imageObj, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
   engine.render.context.globalCompositeOperation = 'source-over';
