@@ -1,6 +1,11 @@
+// Put default values in the text input boxes
 document.getElementById("altitude").value = burn_alt;
 document.getElementById("burn_time").value = burn_duration;
 document.getElementById("thrust").value = burn_thrust;
+document.getElementById("drag_coeff").value = drag_coeff;
+document.getElementById("density").value = rho;
+document.getElementById("init_velocity").value = init_velocity;
+
 
 function process_form(form) {
     var inputs = form.getElementsByTagName("input");
