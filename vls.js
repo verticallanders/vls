@@ -35,8 +35,9 @@ function initRockets() {
   rocket1.render.sprite.texture = "http://s31.postimg.org/vgiq8xqkn/static_rocket.png";
   rocket1.render.sprite.xScale = 1.;
   rocket1.render.sprite.yScale = 1.;
-  rocket1.state = "start";
+  rocket1.state = "fall";
   Sleeping.set(rocket1, false);
+  Body.setAngularVelocity(rocket1, 0.2);
 
   Body.setPosition(rocket2, {x: 500, y: 350});
   rocket2.render.sprite.texture = "http://s31.postimg.org/vgiq8xqkn/static_rocket.png";
@@ -148,12 +149,14 @@ Matter.Events.on(engine, 'collisionStart', function(event) {
     collidingRocket = event.pairs[0].bodyA;
   }
 
-  if (collidingRocket === rocket1) {
-    document.getElementById("stats").innerHTML += "<br>rocket1 impact velocity: " + collidingRocket.speed;
-  } else if (collidingRocket === rocket2) {
-    document.getElementById("stats").innerHTML += "<br>rocket2 impact velocity: " + collidingRocket.speed;
-    rocket2.state = "land";
-    rocket2.impact_velocity = rocket2.speed;
+  if(collidingRocket.state === "fall") {
+    if (collidingRocket === rocket1) {
+      document.getElementById("stats").innerHTML += "<br>rocket1 impact velocity: " + collidingRocket.speed;
+    } else if (collidingRocket === rocket2) {
+      document.getElementById("stats").innerHTML += "<br>rocket2 impact velocity: " + collidingRocket.speed;
+    }
+    collidingRocket.state = "land";
+    collidingRocket.impact_velocity = rocket2.speed;
   }
 
   if (collidingRocket.speed >= impactVelocityThreshold) {
