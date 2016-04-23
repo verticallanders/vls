@@ -2,25 +2,26 @@
 
 <!-- For WebGL accelerated rendering /-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/3.0.11/pixi.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.9.3/matter.js"></script>
 
 <body>
-  <div id="header">
-    <h1>Vertical Landing Simulator</h1>
-  </div>
+  <div id="target"></div><div id="stats"></div>
   <div class="sidebar">
+    <h1>Vertical Landing Simulator</h1>
     <h2>Rocket Controls</h2>
-     <form>
-      Altitude to start motor at:<br>
-      <input type="text" name="altitude"><br>
-      Burn time:<br>
-      <input type="text" name="burn_time">
-      Amount of thrust:<br>
-      <input type="text" name="thrust">
+    <form id="controls" onsubmit="return process_form(this)">
+      <br>Altitude to start motor at:
+      <input type="text" name="altitude" id="altitude" value="400">
+      <br>Burn time:
+      <input type="text" name="burn_time" id="burn_time" value="0.65">
+      <br>Amount of thrust:
+      <input type="text" name="thrust" id="thrust" value="-0.002">
+      <br>
+      <input type="submit">
     </form> 
   </div>
-  <div class="simulation">
+  <div id="simulation">
   </div>
 </body>
 <script src="vls.js"></script>
+<script src="form.js"></script>
