@@ -88,7 +88,7 @@ var rocket_height = rocket2.bounds.max.y - rocket2.bounds.min.y;
 var burn_y = ground_top - burn_alt;
 
 function applyDrag(rocket) {
-    F = 0.5 * rho * rocket.velocity.y * rocket.velocity.y * rocket.drag_coeff * rocket.drag_area * -Math.sign(rocket.velocity.y);
+    var F = 0.5 * rho * rocket.velocity.y * rocket.velocity.y * rocket.drag_coeff * rocket.drag_area * -Math.sign(rocket.velocity.y);
     Body.applyForce(rocket, rocket.position, {x: 0, y: F});
 }
 
