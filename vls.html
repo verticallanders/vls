@@ -1,8 +1,26 @@
+<link rel=stylesheet href="style.css" type="text/css">
+
 <!-- For WebGL accelerated rendering /-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/3.0.11/pixi.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.9.3/matter.js"></script>
 
-<!-- remember that our script should be the last thing loading /-->
-<body></body>
+<body>
+  <div id="header">
+    <h1>Vertical Landing Simulator</h1>
+  </div>
+  <div class="sidebar">
+    <h2>Rocket Controls</h2>
+     <form>
+      Altitude to start motor at:<br>
+      <input type="text" name="altitude"><br>
+      Burn time:<br>
+      <input type="text" name="burn_time">
+      Amount of thrust:<br>
+      <input type="text" name="thrust">
+    </form> 
+  </div>
+  <div class="simulation">
+  </div>
+</body>
 <script src="vls.js"></script>

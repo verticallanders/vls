@@ -1,0 +1,41 @@
+
+body {
+    font-family: AppleGothic, "Century Gothic", Muli, "Avant Garde", sans-serif;
+    background-color: black;
+    color: white;
+}
+
+#header {
+    background-color: grey;
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=70)";
+    filter: alpha(opacity=80);
+    -moz-opacity: 0.80;
+    -khtml-opacity: 0.8;
+    opacity: 0.8;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar {
+    position: absolute;
+    right: 0;
+    top: 92px;
+    bottom: 0;
+    width: 178px;
+}
+.simluation {
+    position: absolute;
+    left:178px; top:92px; right:0; bottom:0;
+}
+
+.header { background: grey; }
+.sidebar { background: grey; }
+.simulation { background: black; }
+
+
