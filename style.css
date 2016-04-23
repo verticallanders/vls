@@ -13,9 +13,9 @@ h2 {
     background: black;
     position: absolute;
     right: 0;
-    top: 100px;
+    top: 10px;
     bottom: 0;
-    width: 400px;
+    width: 1000px;
 }
 
 .div-label {
@@ -23,16 +23,47 @@ h2 {
     width: 100%;
 }
 
-#simluation {
-    position: absolute;
-    left: 178px;
-    top: 92px;
-    right: 0;
-    bottom: 0;
-}
-
 input {
     float: right;
     background: #444;
     color: #AAA;
+}
+
+.planet-selector {
+    width: 100%;
+}
+
+button {
+  display: inline-block;
+  margin: 0 5px 10px 0;
+  padding: 15px 45px;
+  font-size: 18px;
+  font-family: "Bitter",serif;
+  line-height: 1.8;
+  appearance: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+button:focus {
+  outline: none
+}
+
+section.flat button {
+  color: #fff;
+  background-color: #6496c8;
+  text-shadow: -1px 1px #417cb8;
+  border: none;
+}
+
+section.flat button:hover,
+section.flat button.hover {
+  background-color: #346392;
+  text-shadow: -1px 1px #27496d;
+}
+
+section.flat button:active,
+section.flat button.active {
+  background-color: #27496d;
+  text-shadow: -1px 1px #193047;
 }

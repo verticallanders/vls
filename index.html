@@ -7,6 +7,34 @@
   <div id="target"></div><div id="stats"></div>
   <div class="sidebar">
     <h1>Will It Land? 🚀</h1>
+    <div class="planet-selector">
+      <section class="flat">
+        <button onclick="load_values(planets.earth)">
+          <img src="img/earth.png" />
+          <br/>Earth
+        </button>
+        <button onclick="load_values(planets.moon)">
+          <img src="img/moon.png" />
+          <br/>Moon
+        </button>
+        <button onclick="load_values(planets.mars)">
+          <img src="img/mars.png" />
+          <br/>Mars
+        </button>
+        <button onclick="load_values(planets.terraformedMars)">
+          <img src="img/t-mars.png" />
+          <br/>Terraformed Mars
+        </button>
+        <button onclick="load_values(planets.venus)">
+          <img src="img/venus.png" />
+          <br/>Venus
+        </button>
+        <button>
+          <img src="img/question.png" />
+          <br/>Custom
+        </button>
+      </section>
+    </div>
     <form onsubmit="return process_form(this)">
     <h2>Conditions</h2>
       <br><div class="div-label">Initial velocity:&nbsp;
@@ -25,9 +53,7 @@
       <input type="text" name="thrust" id="thrust"></div>
       <br><br>
       <input type="submit" value="Go!">
-    </form> 
-  </div>
-  <div id="simulation">
+    </form>
   </div>
 </body>
 <script src="vls.js"></script>
