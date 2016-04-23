@@ -107,7 +107,6 @@ Events.on(engine, 'beforeUpdate', function() {
   } else if (rocket2.state === "fall") {
     applyDrag(rocket2);
   } else if (rocket2.state === "land") {
-    rocket2.render.sprite.texture = "http://s31.postimg.org/vgiq8xqkn/static_rocket.png";
   }
 });
 
