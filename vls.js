@@ -51,6 +51,8 @@ function initRockets() {
   rocket2.render.sprite.yScale = 1.;
   rocket2.state = "start";
   Sleeping.set(rocket2, false);
+
+  burn_y = ground_top - burn_alt;
 }
 
 initRockets();
