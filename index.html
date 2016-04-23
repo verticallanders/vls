@@ -7,9 +7,17 @@
   <div id="target"></div><div id="stats"></div>
   <div class="sidebar">
     <h1>Will It Land? 🚀</h1>
+    <h2>Conditions</h2>
+    <form onsubmit="return process_form(this)">
+      <br>Initial velocity:
+      <input type="text" name="init_velocity" id="init_velocity">
+      <br>Drag co-efficient:
+      <input type="text" name="drag_coeff" id="drag_coeff">
+      <br>Atmospheric density:
+      <input type="text" name="density" id="density">
+      <br>
     <h2>Rocket Controls</h2>
-    <form id="controls" onsubmit="return process_form(this)">
-      <br>Altitude to start motor at:
+      <br>Altitude to restart motor at:
       <input type="text" name="altitude" id="altitude">
       <br>Burn time:
       <input type="text" name="burn_time" id="burn_time">

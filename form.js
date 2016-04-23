@@ -12,12 +12,18 @@ function process_form(form) {
             continue;
         }
 
-        num_values[inputs[i].name] = inputs[i].value;
+        num_values[inputs[i].name] = Number(inputs[i].value);
     }
-    console.log(num_values);
-    burn_alt =  Number(num_values['altitude']);
-    burn_duration = Number(num_values['burn_time']);
-    burn_thrust = Number(num_values['thrust']);
+
+    // Simulation conditions
+    init_velocity = {x: 0, y: num_values['init_velocity']};
+    drag_coeff = num_values['drag_coeff'];
+    rho = num_values['density'];
+
+    // Rocket controls
+    burn_alt =  num_values['altitude'];
+    burn_duration = num_values['burn_time'];
+    burn_thrust = num_values['thrust'];
 
     document.getElementById("stats").innerHTML = "";
 

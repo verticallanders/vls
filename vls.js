@@ -30,9 +30,15 @@ var explosionSprite = "img/boom.png";
 var imageObj = new Image();
 imageObj.src = bgImageUrl;
 
-// create two boxes and a ground
+// create two rockets
 var rocket1 = Bodies.rectangle(300, 350, 25, 72);
 var rocket2 = Bodies.rectangle(500, 350, 25, 72);
+
+// Initial conditions
+var init_velocity = {x: 0, y: 20};
+var rho = 1.3;
+engine.world.gravity.y = 1;
+var drag_coeff = 0.3;
 
 function initRockets() {
   Body.setPosition(rocket1, {x: 300, y: 350});
@@ -42,8 +48,8 @@ function initRockets() {
   rocket1.state = "fall";
   Sleeping.set(rocket1, false);
   Body.setAngularVelocity(rocket1, 0.2);
-  Body.setVelocity(rocket1, {x: 0, y: 20});
-  Body.setVelocity(rocket2, {x: 0, y: 20});
+  Body.setVelocity(rocket1, init_velocity);
+  Body.setVelocity(rocket2, init_velocity);
 
   Body.setPosition(rocket2, {x: 500, y: 350});
   rocket2.render.sprite.texture = staticRocketSprite;
@@ -51,7 +57,13 @@ function initRockets() {
   rocket2.render.sprite.yScale = 1.;
   rocket2.state = "start";
   Sleeping.set(rocket2, false);
+
+  rocket1.drag_coeff = drag_coeff;
+  rocket1.drag_area = 0.00001;
+  rocket2.drag_coeff = drag_coeff;
+  rocket2.drag_area = 0.00001;
 }
+
 
 initRockets();
 
@@ -72,15 +84,7 @@ var burn_duration = 1.1;
 var burn_alt = 600;
 var burn_thrust = 0.003;
 
-// Rocket settings
-rocket1.drag_coeff = 0.3;
-rocket1.drag_area = 0.00001;
-rocket2.drag_coeff = 0.3;
-rocket2.drag_area = 0.00001;
 
-// Atmosphere etc
-var rho = 1.3;
-engine.world.gravity.y = 1;
 
 // Compute heights of things
 var ground_top = ground.bounds.min.y;
