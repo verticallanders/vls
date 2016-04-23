@@ -4,7 +4,7 @@ document.getElementById("burn_time").value = burn_duration;
 document.getElementById("thrust").value = burn_thrust;
 document.getElementById("drag_coeff").value = drag_coeff;
 document.getElementById("density").value = rho;
-document.getElementById("init_velocity").value = init_velocity;
+document.getElementById("init_velocity").value = init_velocity.y;
 
 
 function process_form(form) {
