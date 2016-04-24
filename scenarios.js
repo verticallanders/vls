@@ -127,7 +127,7 @@ var rockets = {
     height: 58,
     width: 8,
     Cd: 0.8,
-    survivable_velocity: 1500,
+    survivable_velocity: 15,
     max_thrust: 613000,
     sprite_normal: "img/static_proton.png",
     sprite_burning: "img/fiery_proton.png",
