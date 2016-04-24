@@ -55,7 +55,7 @@ var sites = {
     bg_img: "img/venus_bg.jpg",
     bg_img_w: 1200,
     bg_img_h: 960,
-    ground_Fill: "#964911",
+    ground_fill: "#964911",
     thumbnail: "img/venus.png",
   },
 };
