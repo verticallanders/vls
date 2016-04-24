@@ -164,6 +164,8 @@ function initRockets() {
     rocket1.render.sprite.yOffset += Scenario.Rocket.yOffset;
     rocket1.state = "fall";
     rocket1.height = rocket1.bounds.max.y - rocket1.bounds.min.y;
+  } else {
+    rocket1 = Bodies.rectangle(0,0,0,0);
   }
 
   rocket2 = Bodies.rectangle(500,
