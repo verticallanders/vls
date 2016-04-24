@@ -61,6 +61,9 @@ var Scenario = {
 
     // Rocket sprite, broken condition
     sprite_broken: "img/boom.png",
+
+    // Whether to spawn a second tumbling rocket for comparison
+    double_trouble: true,
   },
 
   Burn: {
@@ -141,39 +144,35 @@ function initSite() {
 
 // Initialise the rockets
 function initRockets() {
-  rocket1 = Bodies.rectangle(300,
-    Scenario.Site.bg_img_h - Scenario.Site.start_alt,
-    Scenario.Rocket.width, Scenario.Rocket.height);
+  var vel = {x: 0, y: Scenario.Site.start_vel};
+
+  if(Scenario.Rocket.double_trouble === true) {
+    rocket1 = Bodies.rectangle(300,
+      Scenario.Site.bg_img_h - Scenario.Site.start_alt,
+      Scenario.Rocket.width, Scenario.Rocket.height);
+    Body.setAngle(rocket1, 0);
+    Body.setVelocity(rocket1, invfixv(vel));
+    Body.setMass(rocket1, Scenario.Rocket.mass);
+    Body.setAngularVelocity(rocket1, 0.2);
+    rocket1.frictionAir = 0;
+    rocket1.render.sprite.texture = Scenario.Rocket.sprite_normal;
+    rocket1.render.sprite.xScale = 1;
+    rocket1.render.sprite.yScale = 1;
+    rocket1.state = "fall";
+    rocket1.height = rocket1.bounds.max.y - rocket1.bounds.min.y;
+  }
+
   rocket2 = Bodies.rectangle(500,
     Scenario.Site.bg_img_h - Scenario.Site.start_alt,
     Scenario.Rocket.width, Scenario.Rocket.height);
-
-  Body.setAngle(rocket1, 0);
   Body.setAngle(rocket2, 0);
-
-  var vel = {x: 0, y: Scenario.Site.start_vel};
-  Body.setVelocity(rocket1, invfixv(vel));
   Body.setVelocity(rocket2, invfixv(vel));
-
-  Body.setMass(rocket1, Scenario.Rocket.mass);
   Body.setMass(rocket2, Scenario.Rocket.mass);
-
-  Body.setAngularVelocity(rocket1, 0.2);
-
-  rocket1.frictionAir = 0;
   rocket2.frictionAir = 0;
-
-  rocket1.render.sprite.texture = Scenario.Rocket.sprite_normal;
   rocket2.render.sprite.texture = Scenario.Rocket.sprite_normal;
-  rocket1.render.sprite.xScale = 1;
   rocket2.render.sprite.xScale = 1;
-  rocket1.render.sprite.yScale = 1;
   rocket2.render.sprite.yScale = 1;
-
-  rocket1.state = "fall";
   rocket2.state = "start";
-
-  rocket1.height = rocket1.bounds.max.y - rocket1.bounds.min.y;
   rocket2.height = rocket2.bounds.max.y - rocket2.bounds.min.y;
 
   // Reset the camera to watch the new rocket
@@ -200,7 +199,7 @@ function applyDrag(rocket) {
      * Scenario.Rocket.Cd
      * Scenario.Rocket.area
      * -Math.sign(rocket.velocity.y);
-   Body.applyForce(rocket, rocket.position, {x: 0, y: F * 1e-6});
+   Body.applyForce(rocket, rocket.position, { x: 0, y: F * 1e-6 });
 }
 
 // Run a rocket through the falling-burning-falling-landing states
@@ -228,7 +227,7 @@ function rocketStateMachine(rocket) {
       rocket.render.sprite.texture = Scenario.Rocket.sprite_normal;
     } else {
       var f = Scenario.Burn.thrust/100 * Scenario.Rocket.max_thrust;
-      Body.applyForce(rocket, rocket.position, {x: 0, y: -f * 1e-6});
+      Body.applyForce(rocket, {x: rocket.position.x, y: rocket.bounds.max.y}, {x: 0, y: -f * 1e-6});
       rocket.render.sprite.texture = Scenario.Rocket.sprite_burning;
     }
 

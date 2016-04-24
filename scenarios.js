@@ -73,6 +73,7 @@ var rockets = {
     sprite_burning: "img/fiery_rocket.png",
     sprite_broken: "img/boom.png",
     thumbnail: "img/static_rocket.png",
+    double_trouble: true,
   },
   "Falcon 9": {
     mass: 30000,
