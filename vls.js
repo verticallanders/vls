@@ -61,6 +61,8 @@ var Scenario = {
 
     // Rocket sprite, broken condition
     sprite_broken: "img/boom.png",
+    
+    yOffset: 0,
   },
 
   Burn: {
@@ -169,6 +171,9 @@ function initRockets() {
   rocket2.render.sprite.xScale = 1;
   rocket1.render.sprite.yScale = 1;
   rocket2.render.sprite.yScale = 1;
+
+  rocket1.render.sprite.yOffset = rocket1.render.sprite.yOffset + Scenario.Rocket.yOffset;
+  rocket2.render.sprite.yOffset = rocket2.render.sprite.yOffset + Scenario.Rocket.yOffset;;
 
   rocket1.state = "fall";
   rocket2.state = "start";
@@ -301,6 +306,7 @@ function handleCollision(rocket) {
     rocket.render.sprite.texture = Scenario.Rocket.sprite_broken;
     rocket.render.sprite.xScale = 0.15;
     rocket.render.sprite.yScale = 0.75;
+    rocket.render.sprite.yOffset = rocket.render.sprite.yOffset - Scenario.Rocket.yOffset;
   }
 }
 

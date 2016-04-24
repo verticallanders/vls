@@ -73,7 +73,9 @@ var rockets = {
     sprite_burning: "img/fiery_rocket.png",
     sprite_broken: "img/boom.png",
     thumbnail: "img/static_rocket.png",
+    yOffset: 0,
   },
+  
   "Falcon 9": {
     mass: 30000,
     area: Math.PI * 3.66,
@@ -86,7 +88,9 @@ var rockets = {
     sprite_burning: "img/fiery_falcon.png",
     sprite_broken: "img/boom.png",
     thumbnail: "img/static_falcon.png",
+    yOffset: 0.125,
   },
+  
   "Saturn V": {
     mass: 130000,
     area: Math.PI * 10.1,
@@ -99,7 +103,9 @@ var rockets = {
     sprite_burning: "img/fiery_saturn.png",
     sprite_broken: "img/boom.png",
     thumbnail: "img/static_saturn.png",
+    yOffset: 0,
   },
+  
   "Ariane 5": {
     mass: 20000,
     area: Math.PI * 5.4,
@@ -112,18 +118,21 @@ var rockets = {
     sprite_burning: "img/fiery_ariane.png",
     sprite_broken: "img/boom.png",
     thumbnail: "img/static_ariane.png",
+    yOffset: 0.16,
   },
+  
   "Proton M": {
     mass: 30600,
     area: Math.PI * 7.4,
     height: 58,
     width: 8,
     Cd: 0.8,
-    survivable_velocity: 15,
+    survivable_velocity: 1500,
     max_thrust: 613000,
     sprite_normal: "img/static_proton.png",
     sprite_burning: "img/fiery_proton.png",
     sprite_broken: "img/boom.png",
     thumbnail: "img/static_proton.png",
+    yOffset: 0.15,
   },
 };
