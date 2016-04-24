@@ -58,6 +58,8 @@ function populateForm(scenario) {
   document.getElementById('init_velocity').value = scenario.start_vel || document.getElementById('init_velocity').value;
   document.getElementById('density').value = scenario.rho || document.getElementById('density').value;
   document.getElementById('gravity').value = scenario.g || document.getElementById('gravity').value;
+  document.getElementById('mass').value = scenario.mass || document.getElementById('mass').value;
+  document.getElementById('drag_coeff').value = scenario.Cd || document.getElementById('drag_coeff').value;
 }
 
 picker(document.getElementById("site-picker"), sites, "Site");
