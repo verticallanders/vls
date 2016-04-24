@@ -61,14 +61,11 @@ var Scenario = {
 
     // Rocket sprite, broken condition
     sprite_broken: "img/boom.png",
-<<<<<<< HEAD
 
     // Whether to spawn a second tumbling rocket for comparison
     double_trouble: true,
-=======
-    
+
     yOffset: 0,
->>>>>>> 078e0183220d48d9d6364b2ff1c3fe67f0541fe2
   },
 
   Burn: {
@@ -163,6 +160,7 @@ function initRockets() {
     rocket1.render.sprite.texture = Scenario.Rocket.sprite_normal;
     rocket1.render.sprite.xScale = 1;
     rocket1.render.sprite.yScale = 1;
+    rocket1.render.sprite.yOffset += Scenario.Rocket.yOffset;
     rocket1.state = "fall";
     rocket1.height = rocket1.bounds.max.y - rocket1.bounds.min.y;
   }
@@ -177,14 +175,9 @@ function initRockets() {
   rocket2.render.sprite.texture = Scenario.Rocket.sprite_normal;
   rocket2.render.sprite.xScale = 1;
   rocket2.render.sprite.yScale = 1;
-<<<<<<< HEAD
-=======
 
-  rocket1.render.sprite.yOffset = rocket1.render.sprite.yOffset + Scenario.Rocket.yOffset;
   rocket2.render.sprite.yOffset = rocket2.render.sprite.yOffset + Scenario.Rocket.yOffset;;
 
-  rocket1.state = "fall";
->>>>>>> 078e0183220d48d9d6364b2ff1c3fe67f0541fe2
   rocket2.state = "start";
   rocket2.height = rocket2.bounds.max.y - rocket2.bounds.min.y;
 
