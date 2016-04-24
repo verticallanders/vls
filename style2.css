@@ -21,6 +21,12 @@ html, body {
 a {
   color: white;
   outline: 0;
+  text-align: center;
+}
+
+span {
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 a:hover {
