@@ -87,4 +87,51 @@ document.getElementById("select-t-rosetta").onclick = function(e) {
   Scenario.Site = sites["67P/Churyumov–Gerasimenko"];
 };
 
+var helpers = document.getElementsByClassName("help");
+for(var i=0; i<helpers.length; i++) {
+  helpers[i].onclick = function(e) {
+    this.style.display = "none";
+  };
+}
+
+document.getElementById("select-earth-help").onclick = function(e) {
+  document.getElementById("help-earth").style.display = "block";
+};
+
+document.getElementById("select-moon-help").onclick = function(e) {
+  document.getElementById("help-moon").style.display = "block";
+};
+
+document.getElementById("select-mars-help").onclick = function(e) {
+  document.getElementById("help-mars").style.display = "block";
+};
+
+document.getElementById("select-venus-help").onclick = function(e) {
+  document.getElementById("help-venus").style.display = "block";
+};
+
+document.getElementById("select-tmars-help").onclick = function(e) {
+  document.getElementById("help-tmars").style.display = "block";
+};
+
+document.getElementById("select-earth-help").onclick = function(e) {
+  document.getElementById("help-earth").style.display = "block";
+};
+
+document.getElementById("select-rosetta-help").onclick = function(e) {
+  document.getElementById("help-rosetta").style.display = "block";
+};
+
+document.getElementById("label-initv").onclick = function(e) {
+  document.getElementById("help-initv").style.display = "block";
+};
+
+document.getElementById("label-atmo").onclick = function(e) {
+  document.getElementById("help-atmo").style.display = "block";
+};
+
+document.getElementById("label-drag").onclick = function(e) {
+  document.getElementById("help-drag").style.display = "block";
+};
+
 window.onhashchange = navigation;
