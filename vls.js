@@ -224,17 +224,19 @@ function rocketStateMachine(rocket) {
     applyDrag(rocket);
     var burn_t = Scenario.Burn.duration * 1000;
     if(engine.timing.timestamp - rocket.burn_start_time >= burn_t) {
-      rocket.state = "fall";
+      //rocket.state = "fall";
       rocket.render.sprite.texture = Scenario.Rocket.sprite_normal;
     } else {
       var f = Scenario.Burn.thrust/100 * Scenario.Rocket.max_thrust;
       Body.applyForce(rocket, rocket.position, {x: 0, y: -f * 1e-6});
+      rocket.render.sprite.texture = Scenario.Rocket.sprite_burning;
     }
 
   } else if(rocket.state == "fall") {
     // In the fall state we just fall until the collision handler
     // detects us hitting the ground and swaps us to the land state.
     applyDrag(rocket);
+    rocket.render.sprite.texture = Scenario.Rocket.sprite_normal;
 
   } else if(rocket.state == "land") {
     // We don't really do anything in the landed state.
@@ -255,6 +257,19 @@ function followCam(rocket) {
     engine.render.bounds.min.y = centerOffsetY + rocket.bounds.min.y;
     engine.render.bounds.max.y = centerOffsetY + rocket.bounds.min.y + initialEngineBoundsMaxY;
   }
+}
+
+window.onkeydown = function(e) {
+    if(e.key == " ") {
+        rocket2.state = "burn";
+      rocket.render.sprite.texture = Scenario.Rocket.sprite_burning;
+    }
+}
+window.onkeyup = function(e) {
+    if(e.key == " ") {
+        rocket2.state = "fall";
+      rocket.render.sprite.texture = Scenario.Rocket.sprite_normal;
+    }
 }
 
 // Handle a collision with a rocket and the ground.
