@@ -39,6 +39,7 @@ var planets = {
 };
 
 function process_form(form) {
+
   var inputs = form.getElementsByTagName("input");
   // Parse user input
   var num_values = {};
@@ -53,24 +54,14 @@ function process_form(form) {
   Scenario.Burn.altitude = num_values['altitude'];
   Scenario.Burn.duration = num_values['burn_time'];
   Scenario.Burn.thrust = num_values['thrust'];
+  Scenario.Burn.Cd = num_values['drag_coeff'];
+  Scenario.Burn.rho = num_values['density'];
+  Scenario.Burn.start_vel = num_values['init_velocity'];
+  Scenario.Burn.g = num_values['gravity'];
+  Scenario.Burn.start_alt = num_values['init_altitude'];
+  Scenario.Burn.mass = num_values['mass'];
 
-  load_values(num_values);
+  init();
 
   return false;
-}
-
-function load_values(values) {
-  // Simulation conditions
-  Scenario.Site.start_vel = values['init_velocity'];
-  Scenario.Rocket.Cd = values['drag_coeff'];
-  Scenario.Site.rho = values['density'];
-
-  document.getElementById("drag_coeff").value = values['drag_coeff'];
-  document.getElementById("density").value = values['density'];
-  document.getElementById("init_velocity").value = values['init_velocity'];
-
-  document.getElementById('stats').innerHTML = '';
-
-  // Reset simulation
-  init();
 }

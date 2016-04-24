@@ -83,6 +83,10 @@ document.getElementById("select-t-mars").onclick = function(e) {
   Scenario.Site = sites["Terraformed Mars"];
 };
 
+document.getElementById("select-t-rosetta").onclick = function(e) {
+  Scenario.Site = sites["67P/Churyumov–Gerasimenko"];
+};
+
 var helpers = document.getElementsByClassName("help");
 for(var i=0; i<helpers.length; i++) {
   helpers[i].onclick = function(e) {
@@ -112,6 +116,10 @@ document.getElementById("select-tmars-help").onclick = function(e) {
 
 document.getElementById("select-earth-help").onclick = function(e) {
   document.getElementById("help-earth").style.display = "block";
+};
+
+document.getElementById("select-rosetta-help").onclick = function(e) {
+  document.getElementById("help-rosetta").style.display = "block";
 };
 
 document.getElementById("label-initv").onclick = function(e) {

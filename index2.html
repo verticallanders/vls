@@ -16,7 +16,7 @@
                           You can carry out your mission on <b>the moon</b>,
                           <b>Earth</b>, <b>Venus</b> or on <b>Mars</b>.<br>
                           Good luck!<br><br>
-                          <a href="#info">Continue</a></p>
+                          <a href="#select">Continue</a></p>
     </div>
     <img src="img/earth_panorama.jpg" id=intro-planet>
   </div>
@@ -62,12 +62,18 @@
         </a>
         <figcaption class=info id=select-tmars-help>Terraformed Mars</figcaption class=info>
       </figure>
-    </div>
+    <figure>
+      <a href="#main">
+        <img src=img/rosetta.jpg id=select-t-rosetta class=select-planet>
+      </a>
+      <figcaption class=info id=select-rosetta-help>67P/Churyumov–Gerasimenko</figcaption>
+    </figure>
   </div>
-  <div id=mainpage class=page>
-    <div id=target></div>
-    <div id=main-settings>
-      <form onsubmit="return process_form(this)">
+</div>
+<div id=mainpage class=page>
+  <div id=target></div>
+  <div id=main-settings>
+    <form onsubmit="return process_form(this)">
       <h2>Planet</h2>
       <div id=site-picker class=picker></div>
       <br><div class="div-label">Initial altitude (m):&nbsp;
@@ -142,6 +148,8 @@
     Gravity 3.71 m/s²<br>
     Diameter 6,779 km<br>
     </p>
+  </div>
+  <div id=help-rosetta class=help>
   </div>
   <div id=help-mbar class=help>
     <p>
