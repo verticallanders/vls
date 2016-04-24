@@ -83,4 +83,8 @@ document.getElementById("select-t-mars").onclick = function(e) {
   Scenario.Site = sites["Terraformed Mars"];
 };
 
+document.getElementById("select-t-rosetta").onclick = function(e) {
+  Scenario.Site = sites["67P/Churyumov–Gerasimenko"];
+};
+
 window.onhashchange = navigation;
