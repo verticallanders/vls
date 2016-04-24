@@ -18,17 +18,17 @@ var planets = {
     density: 0,
   },
   mars: {
-    init_velocity: 200,
+    init_velocity: 300,
     drag_coeff: 0.3,
     density: 0.13,
   },
   terraformedMars: {
-    init_velocity: 200,
+    init_velocity: 300,
     drag_coeff: 0.3,
     density: 1.0,
   },
   venus: {
-    init_velocity: 200,
+    init_velocity: 300,
     drag_coeff: 0.3,
     density: 5.0,
   },

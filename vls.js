@@ -129,7 +129,7 @@ function initSite() {
 
   // Create the ground
   ground = Bodies.rectangle(0, Scenario.Site.bg_img_h+50,
-    Scenario.Site.bg_img_w, 100, {isStatic: true});
+    Scenario.Site.bg_img_w*2, 100, {isStatic: true});
   ground.render.fillStyle = Scenario.Site.ground_fill;
   ground.render.strokeStyle = "rgba(0,0,0,0)";
 
@@ -184,8 +184,8 @@ function initRockets() {
 
 // Initialise the scenario
 function init() {
-  console.log("init");
   World.clear(engine.world);
+  document.getElementById("stats").innerHTML = "";
   initSite();
   initRockets();
   World.add(engine.world, [rocket1, rocket2, ground]);
@@ -330,7 +330,3 @@ Events.on(engine.render, "afterRender", function(event) {
     sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
   engine.render.context.globalCompositeOperation = 'source-over';
 });
-
-// Set up and go!
-init();
-Engine.run(engine);

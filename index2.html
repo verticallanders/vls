@@ -1,0 +1,86 @@
+<meta charset="UTF-8">
+<link rel=stylesheet href="style2.css" type="text/css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.9.3/matter.js"></script>
+<body>
+  <div id=intropage class=page>
+    <div id=intro-title-box>
+      <div class=subtitle>Welcome to</div>
+      <h1>Will It Land?</h1>
+    </div>
+    <div id=intro-desc-box>
+      <p align="center">
+        <b>Your mission</b> is to land a rocket safely and vertically.<br><br>
+        <b>You must decide</b> at what altitude should your motor restart?<br>
+                          How long should the motor run for?<br>
+                          How much thrust should it give?<br><br>
+                          You can carry out your mission on <b>the moon</b>, on
+                          <b>Earth</b> or on <b>Mars</b>.<br>
+                          Good luck!<br><br>
+                          <a href="#info">Continue</a></p>
+    </div>
+    <img src="img/earth_panorama.jpg" id=intro-planet>
+  </div>
+  <div id=infopage class=page>
+      <div id=info-title-box>
+        <h1>Will It Land?</h1>
+      </div>
+      <div id=info-desc-box>
+        Help text/photos/educational material goes here.<br>
+        <a href="#select">Continue.</a>
+      </div>
+  </div>
+  <div id=selectpage class=page>
+    <h1>Choose a planet</h1>
+    <div id=select-chooser>
+      <figure>
+        <a href="#main">
+          <img src=img/earth.jpg id=select-earth class=select-planet>
+        </a>
+        <figcaption>Earth</figcaption>
+      </figure>
+      <figure>
+        <a href="#main">
+          <img src=img/moon.jpg id=select-moon class=select-planet>
+        </a>
+        <figcaption>Moon</figcaption>
+      </figure>
+      <figure>
+        <a href="#main">
+          <img src=img/mars.jpg id=select-mars class=select-planet>
+        </a>
+        <figcaption>Mars</figcaption>
+      </figure>
+    </div>
+  </div>
+  <div id=mainpage class=page>
+    <div id=target></div>
+    <div id=main-settings>
+      <div id=site-picker class=picker></div>
+      <div id=rocket-picker class=picker></div>
+      <form onsubmit="return process_form(this)">
+      <h2>Conditions</h2>
+        <br><div class="div-label">Initial velocity:&nbsp;
+        <input type="text" name="init_velocity" id="init_velocity"></div>
+        <br><div class="div-label">Drag co-efficient:&nbsp;
+        <input type="text" name="drag_coeff" id="drag_coeff"></div>
+        <br><div class="div-label">Atmospheric density:&nbsp;
+        <input type="text" name="density" id="density"></div>
+        <br>
+      <h2>Rocket Controls</h2>
+        <br><div class="div-label">Burn altitude:&nbsp;
+        <input type="text" name="altitude" id="altitude"></div>
+        <br><div class="div-label">Burn time: &nbsp;
+        <input type="text" name="burn_time" id="burn_time"></div>
+        <br><div class="div-label">Thrust %:&nbsp;
+        <input type="text" name="thrust" id="thrust"></div>
+        <br><br>
+        <input type="submit" value="Go!">
+      </form>
+      <div id=stats></div>
+    </div>
+  </div>
+</body>
+<script src="vls.js"></script>
+<script src="form.js"></script>
+<script src="scenarios.js"></script>
+<script src="index.js"></script>
