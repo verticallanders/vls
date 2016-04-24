@@ -93,6 +93,7 @@ var engine = Engine.create({
     options: {
       width: 800,
       height: 600,
+      background: '#000',
       hasBounds: true,
       wireframes: false,
       showSleeping: false,
@@ -325,6 +326,11 @@ Events.on(engine.render, "afterRender", function(event) {
   var sourceY = engine.render.bounds.min.y;
   var sourceWidth = destWidth;
   var sourceHeight = destHeight;
+
+  if(sourceY < 0) {
+    destY = -sourceY;
+    sourceY = 0;
+  }
 
   engine.render.context.drawImage(siteBgImg, sourceX, sourceY,
     sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
