@@ -67,26 +67,34 @@
   <div id=mainpage class=page>
     <div id=target></div>
     <div id=main-settings>
-      <div id=site-picker class=picker></div>
-      <div id=rocket-picker class=picker></div>
       <form onsubmit="return process_form(this)">
-      <h2>Conditions</h2>
-        <br><div class="div-label">Initial velocity:&nbsp;
-        <input type="text" name="init_velocity" id="init_velocity"></div>
-        <br><div class="div-label">Drag co-efficient:&nbsp;
-        <input type="text" name="drag_coeff" id="drag_coeff"></div>
-        <br><div class="div-label">Atmospheric density:&nbsp;
-        <input type="text" name="density" id="density"></div>
-        <br>
-      <h2>Rocket Controls</h2>
-        <br><div class="div-label">Burn altitude:&nbsp;
-        <input type="text" name="altitude" id="altitude"></div>
-        <br><div class="div-label">Burn time: &nbsp;
-        <input type="text" name="burn_time" id="burn_time"></div>
-        <br><div class="div-label">Thrust %:&nbsp;
-        <input type="text" name="thrust" id="thrust"></div>
-        <br><br>
-        <input type="submit" value="Go!">
+      <h2>Planet</h2>
+      <div id=site-picker class=picker></div>
+      <br><div class="div-label">Initial altitude:&nbsp;
+      <input type="text" name="init_altitude" id="init_altitude"></div>
+      <br><div class="div-label">Initial velocity:&nbsp;
+      <input type="text" name="init_velocity" id="init_velocity"></div>
+      <br><div class="div-label">Atmospheric density:&nbsp;
+      <input type="text" name="density" id="density"></div>
+      <br><div class="div-label">Gravity:&nbsp;
+      <input type="text" name="gravity" id="gravity"></div>
+      <br>
+      <h2>Rocket</h2>
+      <div id=rocket-picker class=picker></div>
+      <br><div class="div-label">Mass:&nbsp;
+      <input type="text" name="mass" id="mass"></div>
+      <br><div class="div-label">Drag co-efficient:&nbsp;
+      <input type="text" name="drag_coeff" id="drag_coeff"></div>
+      <br>
+      <h2>Burn</h2>
+      <br><div class="div-label">Burn altitude:&nbsp;
+      <input type="text" name="altitude" id="altitude"></div>
+      <br><div class="div-label">Burn time: &nbsp;
+      <input type="text" name="burn_time" id="burn_time"></div>
+      <br><div class="div-label">Thrust %:&nbsp;
+      <input type="text" name="thrust" id="thrust"></div>
+      <br><br>
+      <input type="submit" value="Go!">
       </form>
       <div id=stats></div>
     </div>

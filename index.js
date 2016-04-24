@@ -36,6 +36,7 @@ function picker(element, list, target) {
     choice.target = target;
     choice.onclick = function(e) {
       Scenario[target] = this.data;
+      populateForm(Scenario[target]);
       init();
       return false;
     };
@@ -50,6 +51,13 @@ function picker(element, list, target) {
     choice.style.display = "inline-block";
     element.appendChild(choice);
   }
+}
+
+function populateForm(scenario) {
+  document.getElementById('init_altitude').value = scenario.start_alt || document.getElementById('init_altitude').value;
+  document.getElementById('init_velocity').value = scenario.start_vel || document.getElementById('init_velocity').value;
+  document.getElementById('density').value = scenario.rho || document.getElementById('density').value;
+  document.getElementById('gravity').value = scenario.g || document.getElementById('gravity').value;
 }
 
 picker(document.getElementById("site-picker"), sites, "Site");
