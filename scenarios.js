@@ -58,6 +58,18 @@ var sites = {
     ground_fill: "#964911",
     thumbnail: "img/venus.png",
   },
+  
+  "67P/Churyumov–Gerasimenko": {
+    rho: 0,
+    g: 0.001,
+    start_alt: 400,
+    start_vel: 100,
+    bg_img: "img/rosetta_bg.jpg",
+    bg_img_w: 900,
+    bg_img_h: 945,
+    ground_fill: "#bbb",
+    thumbnail: "img/rosetta.jpg",
+  }
 };
 
 var rockets = {
