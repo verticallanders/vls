@@ -1,4 +1,4 @@
-// Matter.js module alases
+// Matter.js module aliases
 var Engine = Matter.Engine,
   World = Matter.World,
   Bodies = Matter.Bodies,

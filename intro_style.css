@@ -1,0 +1,45 @@
+body, h3, h2, h1 {
+    color: white;
+    background: black;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 100;
+    text-align: center;
+}
+
+h1 {
+    font-size: 50px;
+}
+
+#how_it_works {
+    width: 50%;
+    margin: 0 auto;
+}
+
+p {
+    font-size: 18px;
+}
+
+#earth_pano {
+    top: 100vh;
+    width: 100%;
+}
+
+.planet {
+    width: 250px;
+    display: inline-block;
+}
+
+#chooser {
+    text-align: center;
+    width: 100%;
+    top: 30%;
+    display: inline-block;
+}
+
+figure {
+    display: inline-block;
+}
+
+.page {
+    height: 100vh;
+}

@@ -6,35 +6,69 @@ document.getElementById("drag_coeff").value = drag_coeff;
 document.getElementById("density").value = rho;
 document.getElementById("init_velocity").value = init_velocity.y;
 
+var planets = {
+  earth: {
+    init_velocity: 20,
+    drag_coeff: 0.3,
+    density: 1.3,
+  },
+  moon: {
+    init_velocity: 30,
+    drag_coeff: 0.3,
+    density: 0,
+  },
+  mars: {
+    init_velocity: 20,
+    drag_coeff: 0.3,
+    density: 0.13,
+  },
+  terraformedMars: {
+    init_velocity: 20,
+    drag_coeff: 0.3,
+    density: 1.0,
+  },
+  venus: {
+    init_velocity: 20,
+    drag_coeff: 0.3,
+    density: 5.0,
+  },
+
+};
 
 function process_form(form) {
-    var inputs = form.getElementsByTagName("input");
-
-    // Parse user input
-    var num_values = {};
-    for (var i = 0; i < inputs.length; i++) {
-        if(inputs[i].type != "text") {
-            continue;
-        }
-
-        num_values[inputs[i].name] = Number(inputs[i].value);
+  var inputs = form.getElementsByTagName("input");
+  // Parse user input
+  var num_values = {};
+  for (var i = 0; i < inputs.length; i++) {
+    if(inputs[i].type != "text") {
+        continue;
     }
+    num_values[inputs[i].name] = Number(inputs[i].value);
+  }
 
-    // Simulation conditions
-    init_velocity = {x: 0, y: num_values['init_velocity']};
-    drag_coeff = num_values['drag_coeff'];
-    rho = num_values['density'];
+  // Rocket controls
+  burn_alt =  num_values['altitude'];
+  burn_duration = num_values['burn_time'];
+  burn_thrust = num_values['thrust'];
 
-    // Rocket controls
-    burn_alt =  num_values['altitude'];
-    burn_duration = num_values['burn_time'];
-    burn_thrust = num_values['thrust'];
+  load_values(num_values);
 
-    document.getElementById("stats").innerHTML = "";
+  return false;
+}
 
-    // Reset simulation
-    initRockets();
-    resetCamera(rocket2);
+function load_values(values) {
+  // Simulation conditions
+  init_velocity = {x: 0, y: values['init_velocity']};
+  drag_coeff = values['drag_coeff'];
+  rho = values['density'];
 
-    return false;
+  document.getElementById("drag_coeff").value = values['drag_coeff'];
+  document.getElementById("density").value = values['density'];
+  document.getElementById("init_velocity").value = values['init_velocity'];
+
+  document.getElementById('stats').innerHTML = '';
+
+  // Reset simulation
+  initRockets();
+  resetCamera(rocket2);
 }
