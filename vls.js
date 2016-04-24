@@ -260,13 +260,13 @@ function followCam(rocket) {
 }
 
 window.onkeydown = function(e) {
-    if(e.key == " ") {
-        rocket2.state = "burn";
+    if(e.key == " " && (rocket2.state == "start" || rocket2.state == "fall")) {
+      rocket2.state = "burn";
       rocket.render.sprite.texture = Scenario.Rocket.sprite_burning;
     }
 }
 window.onkeyup = function(e) {
-    if(e.key == " ") {
+    if(e.key == " " && rocket2.state == "burn") {
         rocket2.state = "fall";
       rocket.render.sprite.texture = Scenario.Rocket.sprite_normal;
     }
