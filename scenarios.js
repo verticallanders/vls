@@ -61,7 +61,7 @@ var sites = {
 };
 
 var rockets = {
-  "Falcon 9": {
+  "WIL": {
     mass: 30000,
     area: Math.PI * 3.66,
     height: 72,
@@ -73,5 +73,31 @@ var rockets = {
     sprite_burning: "img/fiery_rocket.png",
     sprite_broken: "img/boom.png",
     thumbnail: "img/static_rocket.png",
+  },
+  "Falcon 9": {
+    mass: 30000,
+    area: Math.PI * 3.66,
+    height: 72,
+    width: 4,
+    Cd: 0.3,
+    survivable_velocity: 15,
+    max_thrust: 6806000,
+    sprite_normal: "img/static_falcon.png",
+    sprite_burning: "img/fiery_falcon.png",
+    sprite_broken: "img/boom.png",
+    thumbnail: "img/static_falcon.png",
+  },
+  "Saturn V": {
+    mass: 130000,
+    area: Math.PI * 10.1,
+    height: 116,
+    width: 10,
+    Cd: 0.3,
+    survivable_velocity: 15,
+    max_thrust: 1000000,
+    sprite_normal: "img/static_saturn.png",
+    sprite_burning: "img/fiery_saturn.png",
+    sprite_broken: "img/boom.png",
+    thumbnail: "img/static_saturn.png",
   },
 };
