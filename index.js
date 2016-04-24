@@ -65,4 +65,12 @@ document.getElementById("select-mars").onclick = function(e) {
   Scenario.Site = sites.Mars;
 };
 
+document.getElementById("select-venus").onclick = function(e) {
+  Scenario.Site = sites.Venus;
+};
+
+document.getElementById("select-t-mars").onclick = function(e) {
+  Scenario.Site = sites["Terraformed Mars"];
+};
+
 window.onhashchange = navigation;
