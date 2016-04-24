@@ -260,15 +260,15 @@ function followCam(rocket) {
 }
 
 document.onkeydown = function(e) {
-    if(e.key == " " && (rocket2.state == "start" || rocket2.state == "fall")) {
+    if(e.keyCode == 32 && (rocket2.state == "start" || rocket2.state == "fall")) {
       rocket2.state = "burn";
-      rocket.render.sprite.texture = Scenario.Rocket.sprite_burning;
+      rocket2.render.sprite.texture = Scenario.Rocket.sprite_burning;
     }
 }
 document.onkeyup = function(e) {
-    if(e.key == " " && rocket2.state == "burn") {
+    if(e.keyCode == 32 && rocket2.state == "burn") {
         rocket2.state = "fall";
-      rocket.render.sprite.texture = Scenario.Rocket.sprite_normal;
+      rocket2.render.sprite.texture = Scenario.Rocket.sprite_normal;
     }
 }
 
