@@ -146,3 +146,9 @@ h1 {
   overflow: hidden;
   display: none;
 }
+
+.info:hover {
+    text-decoration: underline;
+    cursor: help;
+}
+
