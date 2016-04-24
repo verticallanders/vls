@@ -19,7 +19,7 @@ var sites = {
     bg_img: "img/moon_bg.jpg",
     bg_img_w: 900,
     bg_img_h: 945,
-    ground_fill: "#dddddd",
+    ground_fill: "#bbb",
     thumbnail: "img/moon.jpg",
   },
 
@@ -45,6 +45,18 @@ var sites = {
     bg_img_h: 960,
     ground_fill: "#68e510",
     thumbnail: "img/t-mars.png",
+  },
+
+  Venus: {
+    rho: 5.0,
+    g: 8.858,
+    start_alt: 600,
+    start_vel: 200,
+    bg_img: "img/venus_bg.jpg",
+    bg_img_w: 1200,
+    bg_img_h: 960,
+    ground_Fill: "#964911",
+    thumbnail: "img/venus.png",
   },
 };
 
