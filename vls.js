@@ -1,3 +1,82 @@
+// Will It Land?
+// Simulator Engine
+
+// Our configuration
+var Scenario = {
+
+  Site: {
+    // Landing site atmospheric density, kg/m³
+    rho: 1.3,
+
+    // Landing site gravitational acceleration, m/s/s
+    g: 9.81,
+
+    // Landing site initial altitude, metres above ground level
+    // Must be less than the background image height.
+    start_alt: 1000,
+
+    // Landing site initial velocity, m/s
+    start_vel: 300,
+
+    // Landing site background image
+    bg_img: "img/stars.jpg",
+
+    // Landing site background image width
+    bg_img_w: 2560,
+
+    // Landing site background image height
+    bg_img_h: 1600,
+
+    // Landing site ground fill (colour or CSS image)
+    ground_fill: "#4d2600",
+  },
+
+  Rocket: {
+    // Rocket mass, kg
+    mass: 30000,
+
+    // Rocket frontal surface area, for drag purposes, m²
+    area: Math.PI * 3.66,
+
+    // Rocket height, for display purposes, m
+    height: 72,
+
+    // Rocket width, for display purposes, m
+    width: 25,
+
+    // Rocket drag coefficient
+    Cd: 0.3,
+
+    // Rocket maximum survival velocity
+    survivable_velocity: 15,
+
+    // Rocket maximum thrust, newtons
+    max_thrust: 6806000,
+
+    // Rocket sprite, normal condition
+    sprite_normal: "img/static_rocket.png",
+
+    // Rocket sprite, burning condition
+    sprite_burning: "img/fiery_rocket.png",
+
+    // Rocket sprite, broken condition
+    sprite_broken: "img/boom.png",
+  },
+
+  Burn: {
+    // Burn start altitude, metres above ground level
+    altitude: 260,
+
+    // Burn duration, seconds
+    duration: 1.4,
+
+    // Thrust, percentage full power
+    thrust: 100,
+  },
+};
+
+// End of configuration.
+
 // Matter.js module aliases
 var Engine = Matter.Engine,
   World = Matter.World,
@@ -7,7 +86,7 @@ var Engine = Matter.Engine,
   Vector = Matter.Vector,
   Events = Matter.Events;
 
-// create a Matter.js engine
+// Create Matter.js engine
 var engine = Engine.create({
   render: {
     element: document.getElementById("target"),
@@ -21,230 +100,237 @@ var engine = Engine.create({
   }
 });
 
-// global constants
-var impactVelocityThreshold = 15.; // extremely arbitrary
-var bgImageUrl = "img/stars.jpg";
-var staticRocketSprite = "img/static_rocket.png";
-var fieryRocketSprite =  "img/fiery_rocket.png";
-var explosionSprite = "img/boom.png";
-
-// preload the background image
-var imageObj = new Image();
-imageObj.src = bgImageUrl;
-
-// create two rockets
-var rocket1 = Bodies.rectangle(300, 350, 25, 72);
-var rocket2 = Bodies.rectangle(500, 350, 25, 72);
-
-// Control variables
-var burn_duration = 1.4;
-var burn_alt = 260;
-var burn_thrust = 6806000;
-
-// Initial conditions
-var init_velocity = {x: 0, y: 300};
-var rho = 1.3;
-var drag_coeff = 0.3;
-var fun_mode = true;
-engine.world.gravity.y = 9.81e-6;
-engine.world.gravity.scale = 1;
-
-if(fun_mode) {
-    engine.world.gravity.scale = 15;
-    impactVelocityThreshold = 80;
-    init_velocity.y = 100;
-    burn_thrust *= 1.5;
-    burn_duration = 2.2;
-    burn_alt = 550;
-}
-
+// Helper functions to turn internal velocities into m/s
+// NB assumes timeDelta is 1000/60
 function fixv(velocity) {
-    return {x: velocity.x * 60, y: velocity.y * 60};
+  return Vector.mult(velocity, 60);
 }
-
 function invfixv(velocity) {
-    return {x: velocity.x * 1 / 60, y: velocity.y * 1 / 60};
+  return Vector.div(velocity, 60);
 }
 
+// Store the background image
+var siteBgImg = new Image();
+
+// Store the two rockets and the ground
+var rocket1, rocket2, ground;
+
+// Record initial camera bounds
+var initialEngineBoundsMaxX = engine.render.bounds.max.x,
+  initialEngineBoundsMaxY = engine.render.bounds.max.y,
+  centerOffsetX = (engine.render.bounds.min.x - engine.render.bounds.max.x)/2,
+  centerOffsetY = (engine.render.bounds.min.y - engine.render.bounds.max.y)/2;
+
+// Initialise the Site
+function initSite() {
+
+  // Load background image
+  siteBgImg.src = Scenario.Site.bg_img;
+
+  // Create the ground
+  ground = Bodies.rectangle(0, Scenario.Site.bg_img_h+50,
+    Scenario.Site.bg_img_w, 100, {isStatic: true});
+  ground.render.fillStyle = Scenario.Site.ground_fill;
+  ground.render.strokeStyle = "rgba(0,0,0,0)";
+
+  // Set gravity
+  engine.world.gravity.y = Scenario.Site.g;
+  engine.world.gravity.scale = 1e-6;
+}
+
+// Initialise the rockets
 function initRockets() {
-  Body.setPosition(rocket1, {x: 300, y: 350});
+  rocket1 = Bodies.rectangle(300,
+    Scenario.Site.bg_img_h - Scenario.Site.start_alt,
+    Scenario.Rocket.width, Scenario.Rocket.height);
+  rocket2 = Bodies.rectangle(500,
+    Scenario.Site.bg_img_h - Scenario.Site.start_alt,
+    Scenario.Rocket.width, Scenario.Rocket.height);
+
   Body.setAngle(rocket1, 0);
-  rocket1.render.sprite.texture = staticRocketSprite;
-  rocket1.render.sprite.xScale = 1.;
-  rocket1.render.sprite.yScale = 1.;
-  rocket1.frictionAir = 0;
-  rocket1.state = "fall";
-  Sleeping.set(rocket1, false);
-  Body.setAngularVelocity(rocket1, 0.2);
-  Body.setVelocity(rocket1, invfixv(init_velocity));
-  Body.setMass(rocket1, 30000);
-
-  Body.setPosition(rocket2, {x: 500, y: 350});
-  Body.setVelocity(rocket2, invfixv(init_velocity));
   Body.setAngle(rocket2, 0);
-  rocket2.render.sprite.texture = staticRocketSprite;
-  rocket2.render.sprite.xScale = 1.;
-  rocket2.render.sprite.yScale = 1.;
+
+  var vel = {x: 0, y: Scenario.Site.start_vel};
+  Body.setVelocity(rocket1, invfixv(vel));
+  Body.setVelocity(rocket2, invfixv(vel));
+
+  Body.setMass(rocket1, Scenario.Rocket.mass);
+  Body.setMass(rocket2, Scenario.Rocket.mass);
+
+  Body.setAngularVelocity(rocket1, 0.2);
+
+  rocket1.frictionAir = 0;
   rocket2.frictionAir = 0;
+
+  rocket1.render.sprite.texture = Scenario.Rocket.sprite_normal;
+  rocket2.render.sprite.texture = Scenario.Rocket.sprite_normal;
+  rocket1.render.sprite.xScale = 1;
+  rocket2.render.sprite.xScale = 1;
+  rocket1.render.sprite.yScale = 1;
+  rocket2.render.sprite.yScale = 1;
+
+  rocket1.state = "fall";
   rocket2.state = "start";
-  Body.setMass(rocket2, 30000);
-  Sleeping.set(rocket2, false);
 
-  rocket1.drag_coeff = drag_coeff;
-  rocket1.drag_area = Math.PI * 3.66;
-  rocket2.drag_coeff = drag_coeff;
-  rocket2.drag_area = Math.PI * 3.66;
-  burn_y = ground_top - burn_alt;
+  rocket1.height = rocket1.bounds.max.y - rocket1.bounds.min.y;
+  rocket2.height = rocket2.bounds.max.y - rocket2.bounds.min.y;
 
-  console.log("Rocket1 initialised, time:    " + engine.timing.timestamp);
-  console.log("Rocket1 initialised, altitude:" + rocket1.position.y);
-  console.log("Rocket1 initialised, velocity:" + fixv(rocket1.velocity).y);
+  // Reset the camera to watch the new rocket
+  engine.render.bounds.min.x = centerOffsetX + rocket2.bounds.min.x;
+  engine.render.bounds.max.x = centerOffsetX + rocket2.bounds.min.x + initialEngineBoundsMaxX;
+  engine.render.bounds.min.y = centerOffsetY + rocket2.bounds.min.y;
+  engine.render.bounds.max.y = centerOffsetY + rocket2.bounds.min.y + initialEngineBoundsMaxY;
 }
 
+// Initialise the scenario
+function init() {
+  console.log("init");
+  World.clear(engine.world);
+  initSite();
+  initRockets();
+  World.add(engine.world, [rocket1, rocket2, ground]);
+}
 
-initRockets();
-
-// 1600 are 2560 are height and width of the background image
-var groundWidth = 10
-var ground = Bodies.rectangle(0, 1600-2*groundWidth, 2500, groundWidth, {
-  isStatic: true
-});
-ground.render.fillStyle = "#4d2600";
-ground.render.strokeStyle = "#4d2600";
-
-
-// add all of the bodies to the world
-World.add(engine.world, [rocket1, rocket2, ground]);
-
-
-// Compute heights of things
-var ground_top = ground.bounds.min.y;
-var rocket_height = rocket2.bounds.max.y - rocket2.bounds.min.y;
-var burn_y = ground_top - burn_alt;
-
+// Apply drag forces to a rocket
 function applyDrag(rocket) {
-   var F = 0.5 * rho * fixv(rocket.velocity).y * fixv(rocket.velocity).y
-           * rocket.drag_coeff * rocket.drag_area
-           * -Math.sign(rocket.velocity.y);
+   var F = 0.5
+     * Scenario.Site.rho
+     * fixv(rocket.velocity).y * fixv(rocket.velocity).y
+     * Scenario.Rocket.Cd
+     * Scenario.Rocket.area
+     * -Math.sign(rocket.velocity.y);
    Body.applyForce(rocket, rocket.position, {x: 0, y: F * 1e-6});
 }
 
-Events.on(engine, 'beforeUpdate', function() {
-  applyDrag(rocket1);
-
-  if (rocket2.state === "start") {
-    applyDrag(rocket2);
-    if (rocket2.position.y > burn_y) {
-      rocket2.burn_start_time = engine.timing.timestamp;
-      rocket2.state = "burn";
-      rocket2.render.sprite.texture = fieryRocketSprite;
+// Run a rocket through the falling-burning-falling-landing states
+function rocketStateMachine(rocket) {
+  if(rocket.state == "start") {
+    // In the start state, we fall until we reach the altitude
+    // to start burning at, then we log that time and swap to burn.
+    //
+    applyDrag(rocket);
+    var burn_start = Scenario.Site.bg_img_h - Scenario.Burn.altitude;
+    if(rocket.position.y > burn_start) {
+      rocket.burn_start_time = engine.timing.timestamp;
+      rocket.state = "burn";
+      rocket.render.sprite.texture = Scenario.Rocket.sprite_burning;
     }
-  } else if (rocket2.state === "burn") {
-    applyDrag(rocket2);
-    if (engine.timing.timestamp - rocket2.burn_start_time >= burn_duration * 1000) {
-      rocket2.state = "fall";
-      rocket2.render.sprite.texture = staticRocketSprite;
+
+  } else if(rocket.state == "burn") {
+    // In the burn state, we fall while applying burn thrust until
+    // we run out of burn time, then we go to the fall state.
+    //
+    applyDrag(rocket);
+    var burn_t = Scenario.Burn.duration * 1000;
+    if(engine.timing.timestamp - rocket.burn_start_time >= burn_t) {
+      rocket.state = "fall";
+      rocket.render.sprite.texture = Scenario.Rocket.sprite_normal;
     } else {
-      Body.applyForce(rocket2, rocket2.position, {
-        x: 0,
-        y: -burn_thrust * 1e-6
-      });
+      var f = Scenario.Burn.thrust/100 * Scenario.Rocket.max_thrust;
+      Body.applyForce(rocket, rocket.position, {x: 0, y: -f * 1e-6});
     }
-  } else if (rocket2.state === "fall") {
-    applyDrag(rocket2);
-  } else if (rocket2.state === "land") {
+
+  } else if(rocket.state == "fall") {
+    // In the fall state we just fall until the collision handler
+    // detects us hitting the ground and swaps us to the land state.
+    applyDrag(rocket);
+
+  } else if(rocket.state == "land") {
+    // We don't really do anything in the landed state.
   }
-});
-
-var initialEngineBoundsMaxX = engine.render.bounds.max.x,
-  initialEngineBoundsMaxY = engine.render.bounds.max.y,
-  centerOffsetX = (engine.render.bounds.min.x - engine.render.bounds.max.x) / 2,
-  centerOffsetY = (engine.render.bounds.min.y - engine.render.bounds.max.y) / 2;
-
-function resetCamera(hero) {
-  engine.render.bounds.min.x = centerOffsetX + hero.bounds.min.x;
-  engine.render.bounds.max.x = centerOffsetX + hero.bounds.min.x + initialEngineBoundsMaxX;
-  engine.render.bounds.min.y = centerOffsetY + hero.bounds.min.y;
-  engine.render.bounds.max.y = centerOffsetY + hero.bounds.min.y + initialEngineBoundsMaxY;
 }
 
-var hero = rocket2;
+// Update the camera to follow the given rocket
+function followCam(rocket) {
+  // Update X position
+  engine.render.bounds.min.x = centerOffsetX + rocket.bounds.min.x;
+  engine.render.bounds.max.x = centerOffsetX + rocket.bounds.min.x + initialEngineBoundsMaxX;
 
-// this function will be called roughly 60 times per second
-Events.on(engine, 'beforeUpdate', function(event) {
-  // Follow Hero X
-  engine.render.bounds.min.x = centerOffsetX + hero.bounds.min.x;
-  engine.render.bounds.max.x = centerOffsetX + hero.bounds.min.x + initialEngineBoundsMaxX;
-
-  // Follow Hero Y
+  // Update Y position, clipping to the ground
   if (engine.render.bounds.max.y >= ground.bounds.max.y) {
     engine.render.bounds.min.y = ground.bounds.max.y - initialEngineBoundsMaxY
     engine.render.bounds.max.y = ground.bounds.max.y
   } else {
-    engine.render.bounds.min.y = centerOffsetY + hero.bounds.min.y;
-    engine.render.bounds.max.y = centerOffsetY + hero.bounds.min.y + initialEngineBoundsMaxY;
+    engine.render.bounds.min.y = centerOffsetY + rocket.bounds.min.y;
+    engine.render.bounds.max.y = centerOffsetY + rocket.bounds.min.y + initialEngineBoundsMaxY;
   }
-});
-
-Matter.Events.on(engine, 'collisionStart', function(event) {
-    console.log(event.pairs);
-  for(var i=0; i<event.pairs.length; i++) {
-      if (event.pairs[i].bodyA.isStatic) {
-        collidingRocket = event.pairs[i].bodyB;
-      } else {
-        collidingRocket = event.pairs[i].bodyA;
-      }
-      console.log("handling collision, rocket:");
-      console.log(collidingRocket);
-      handleCollision(collidingRocket);
-  }
-});
-
-function handleCollision(collidingRocket) {
-  if(collidingRocket.state === "fall" || collidingRocket.state == "burn") {
-    if (collidingRocket === rocket1) {
-      document.getElementById("stats").innerHTML +=
-        "<br>rocket1 impact velocity: " + Math.round(fixv(collidingRocket.velocity).y);
-      console.log("Rocket1 landed, time:    " + engine.timing.timestamp);
-      console.log("Rocket1 landed, altitude:" + rocket1.position.y);
-      console.log("Rocket1 landed, velocity:" + fixv(rocket1.velocity).y);
-    } else if (collidingRocket === rocket2) {
-      document.getElementById("stats").innerHTML +=
-        "<br>rocket2 impact velocity: " + Math.round(fixv(collidingRocket.velocity).y);
-    }
-    collidingRocket.impact_velocity = rocket2.speed;
-  }
-
-  collidingRocket.state = "land";
-  Sleeping.set(collidingRocket, true);
-
-  if (fixv(collidingRocket.velocity).y >= impactVelocityThreshold) {
-    Body.setAngle(collidingRocket, 0);
-    collidingRocket.render.sprite.texture = explosionSprite;
-    collidingRocket.render.sprite.xScale = 0.15;
-    collidingRocket.render.sprite.yScale = 0.75;
-  }
-
 }
 
+// Handle a collision with a rocket and the ground.
+// If the rocket is not landed, land it.
+// If the rocket landed too quickly, destroy it.
+function handleCollision(rocket) {
+  if(rocket.state == "land") {
+    return;
+  }
+
+  // Update the status text
+  if (rocket === rocket1) {
+    document.getElementById("stats").innerHTML +=
+      "<br>Tumbling rocket impact velocity: "
+      + Math.round(fixv(rocket.velocity).y);
+  } else if (rocket === rocket2) {
+    document.getElementById("stats").innerHTML +=
+      "<br>Burning rocket impact velocity: "
+      + Math.round(fixv(rocket.velocity).y);
+  }
+
+  // Land the rocket
+  rocket.state = "land";
+  Sleeping.set(rocket, true);
+
+  // Explode overly fast rockets
+  if (fixv(rocket.velocity).y >= Scenario.Rocket.survivable_velocity) {
+    Body.setAngle(rocket, 0);
+    rocket.render.sprite.texture = Scenario.Rocket.sprite_broken;
+    rocket.render.sprite.xScale = 0.15;
+    rocket.render.sprite.yScale = 0.75;
+  }
+}
+
+// Runs every engine update, roughly 60 fps.
+// Just put drag on the left rocket, run the right through the states.
+// Update camera position to follow the rocket.
+Events.on(engine, 'beforeUpdate', function() {
+  applyDrag(rocket1);
+  rocketStateMachine(rocket2);
+  followCam(rocket2);
+});
+
+// Runs every time a collision is detected.
+// We'll step through all detected colliding pairs, detect which one is
+// the rocket, and handle it.
+Events.on(engine, 'collisionStart', function(event) {
+  for(var i=0; i<event.pairs.length; i++) {
+    if(event.pairs[i].bodyA === rocket1 || event.pairs[i].bodyA === rocket2) {
+      handleCollision(event.pairs[i].bodyA);
+    } else {
+      handleCollision(event.pairs[i].bodyB);
+    }
+  }
+});
+
+// Render the background image
 Events.on(engine.render, "afterRender", function(event) {
   engine.render.context.globalCompositeOperation = 'destination-over';
 
-  //draw cropped background on the whole canvas
+  // Draw cropped background on the whole canvas
   var destX = 0;
   var destY = 0;
   var destWidth = engine.render.canvas.width;
   var destHeight = engine.render.canvas.height;
 
-  // by cropping the source rectangle
+  // ...by cropping the source rectangle
   var sourceX = engine.render.bounds.min.x;
   var sourceY = engine.render.bounds.min.y;
   var sourceWidth = destWidth;
   var sourceHeight = destHeight;
 
-  engine.render.context.drawImage(imageObj, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
+  engine.render.context.drawImage(siteBgImg, sourceX, sourceY,
+    sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
   engine.render.context.globalCompositeOperation = 'source-over';
 });
 
-// run the engine
+// Set up and go!
+init();
 Engine.run(engine);
