@@ -113,4 +113,17 @@ var rockets = {
     sprite_broken: "img/boom.png",
     thumbnail: "img/static_ariane.png",
   },
+  "Proton M": {
+    mass: 30600,
+    area: Math.PI * 7.4,
+    height: 58,
+    width: 8,
+    Cd: 0.8,
+    survivable_velocity: 15,
+    max_thrust: 613000,
+    sprite_normal: "img/static_proton.png",
+    sprite_burning: "img/fiery_proton.png",
+    sprite_broken: "img/boom.png",
+    thumbnail: "img/static_proton.png",
+  },
 };
