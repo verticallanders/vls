@@ -36,31 +36,31 @@
         <a href="#main">
           <img src=img/earth.jpg id=select-earth class=select-planet>
         </a>
-        <figcaption>Earth</figcaption>
+        <figcaption id=select-earth-help>Earth</figcaption>
       </figure>
       <figure>
         <a href="#main">
           <img src=img/moon.jpg id=select-moon class=select-planet>
         </a>
-        <figcaption>Moon</figcaption>
+        <figcaption id=select-moon-help>Moon</figcaption>
       </figure>
       <figure>
         <a href="#main">
           <img src=img/mars.jpg id=select-mars class=select-planet>
         </a>
-        <figcaption>Mars</figcaption>
+        <figcaption id=select-mars-help>Mars</figcaption>
       </figure>
       <figure>
         <a href="#main">
           <img src=img/venus.jpg id=select-venus class=select-planet>
         </a>
-        <figcaption>Venus</figcaption>
+        <figcaption id=select-venus-help>Venus</figcaption>
       </figure>
       <figure>
         <a href="#main">
           <img src=img/t-mars.png id=select-t-mars class=select-planet>
         </a>
-        <figcaption>Terraformed Mars</figcaption>
+        <figcaption id=select-tmars-help>Terraformed Mars</figcaption>
       </figure>
     </div>
   </div>
@@ -98,6 +98,86 @@
       </form>
       <div id=stats></div>
     </div>
+  </div>
+  <div id=help-earth class=help>
+    <p>Our home earth is the 3rd planet from the sun and is home to all current
+    known life. It has a fairly thick atmosphere made up of predominantly Nitrogen
+    and Oxygen.</p>
+    <p>
+    Pressure 1013.25 millibars<br>
+    Gravity 9.81 m/s²<br>
+    Diameter 12,742 km<br>
+    </p>
+  </div>
+  <div id=help-mars class=help>
+    <p>
+    This is our nearest planet and is the 4th planet from the sun it has an
+    atmosphere that is much thinner than earth and it is made up predominately
+    of Carbon Dioxide and Nitrogen.
+    </p>
+    <p>
+    Pressure 6.0 mbar<br>
+    Gravity 3.71 m/s²<br>
+    Diameter 6,779 km<br>
+    </p>
+  </div>
+  <div id=help-moon class=help>
+    <p>Our moon is in orbit around earth which causes our tides, due to its
+    small size it has almost no gravity and a much smaller atmosphere than
+    earth.</p>
+    Pressure Almost Zero<br>
+    Gravity 1.622 m/s²<br>
+    Diameter 3,474 km<br>
+    </p>
+  </div>
+  <div id=help-venus class=help>
+  </div>
+  <div id=help-tmars class=help>
+    <p>The dream of some scientists is to terraform Mars so that it is suitable
+    for humans in such a way that we would not need to wear a space suit and
+    only a gas mask. One day Mars may be suitable for general humans if its
+    atmosphere is heavily modified.</p>
+    <p>
+    Pressure 190 millibars<br>
+    Gravity 3.71 m/s²<br>
+    Diameter 6,779 km<br>
+    </p>
+  </div>
+  <div id=help-mbar class=help>
+    <p>
+    Millibars is a unit of pressure humans need a certain amount of pressure to keep them alive and to 
+    keep water which makes up 75% of our bodies in liquid. If the pressure gets to low the water at 
+    body temperature turns into a gas. This level of pressure is often called the “Armstrong Limit” which is  
+    62 millibar.
+    </p>
+  </div>
+  <div id=help-grav class=help>
+    <p>
+    This is measured in m/s² which is the speed that an object would fall in a
+    vacuum in meters per second. For example on earth where gravity is 9.81 m/s²
+    this would mean that after 1 second it would be falling at 9.81m every second
+    and 19.62m every second after 2 seconds of falling. A vacuum means the absence
+    of air.
+    </p>
+  </div>
+  <div id=help-dia class=help>
+    <p>This is how wide the planet is at its furthest point</p>
+  </div>
+  <div id=help-initv class=help>
+    <p>This is the starting velocity that your rockets begin falling at
+    particularly when deorbiting a planetary body rockets can fall at very high
+    velocities in excess of 1000m/s</p>
+  </div>
+  <div id=help-drag class=help>
+<p>This is a calculation that is done to work out the amount of drag an object
+experiences when moving through a fluid environment in this context that can
+mean water or air but for us its the effect that this has on its atmospheric
+conditions that’s important.</p>
+  </div>
+  <div id=help-atmo class=help>
+<p>This varies a huge amount by planets one thing to consider is that its not
+only the pressure that effects the drag but also the density of the material
+that it is passing through as a result we have listed the density in KG/M³</p>
   </div>
 </body>
 <script src="vls.js"></script>
