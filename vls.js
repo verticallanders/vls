@@ -64,7 +64,8 @@ var Scenario = {
 
     // Whether to spawn a second tumbling rocket for comparison
     double_trouble: true,
-
+    
+    // Relative offset for the sprite - as a proportion of height it seems
     yOffset: 0,
   },
 
@@ -256,8 +257,8 @@ function followCam(rocket) {
 
   // Update Y position, clipping to the ground
   if (engine.render.bounds.max.y >= ground.bounds.max.y) {
-    engine.render.bounds.min.y = ground.bounds.max.y - initialEngineBoundsMaxY
-    engine.render.bounds.max.y = ground.bounds.max.y
+    engine.render.bounds.min.y = ground.bounds.max.y - initialEngineBoundsMaxY;
+    engine.render.bounds.max.y = ground.bounds.max.y;
   } else {
     engine.render.bounds.min.y = centerOffsetY + rocket.bounds.min.y;
     engine.render.bounds.max.y = centerOffsetY + rocket.bounds.min.y + initialEngineBoundsMaxY;
@@ -344,7 +345,7 @@ Events.on(engine.render, "afterRender", function(event) {
 
   // ...by cropping the source rectangle
   var sourceX = engine.render.bounds.min.x;
-  var sourceY = engine.render.bounds.min.y;
+  var sourceY = engine.render.bounds.min.y - 100;
   var sourceWidth = destWidth;
   var sourceHeight = destHeight;
 
