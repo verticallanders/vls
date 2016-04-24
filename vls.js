@@ -64,7 +64,8 @@ var Scenario = {
 
     // Whether to spawn a second tumbling rocket for comparison
     double_trouble: true,
-
+    
+    // Relative offset for the sprite - as a proportion of height it seems
     yOffset: 0,
   },
 
