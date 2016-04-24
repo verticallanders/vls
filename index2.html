@@ -2,81 +2,81 @@
 <link rel=stylesheet href="style2.css" type="text/css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/matter-js/0.9.3/matter.js"></script>
 <body>
-  <div id=intropage class=page>
-    <div id=intro-title-box>
-      <div class=subtitle>Welcome to</div>
-      <h1>Will It Land?</h1>
-    </div>
-    <div id=intro-desc-box>
-      <p align="center">
-        <b>Your mission</b> is to land a rocket safely and vertically.<br><br>
-        <b>You must decide</b> at what altitude should your motor restart?<br>
-                          How long should the motor run for?<br>
-                          How much thrust should it give?<br><br>
-                          You can carry out your mission on <b>the moon</b>,
-                          <b>Earth</b>, <b>Venus</b> or on <b>Mars</b>.<br>
-                          Good luck!<br><br>
-                          <a href="#info">Continue</a></p>
-    </div>
-    <img src="img/earth_panorama.jpg" id=intro-planet>
+<div id=intropage class=page>
+  <div id=intro-title-box>
+    <div class=subtitle>Welcome to</div>
+    <h1>Will It Land?</h1>
   </div>
-  <div id=infopage class=page>
-      <div id=info-title-box>
-        <h1>Will It Land?</h1>
-      </div>
-      <div id=info-desc-box>
-        Help text/photos/educational material goes here.<br>
-        <a href="#select">Continue.</a>
-      </div>
+  <div id=intro-desc-box>
+    <p align="center">
+      <b>Your mission</b> is to land a rocket safely and vertically.<br><br>
+      <b>You must decide</b> at what altitude should your motor restart?<br>
+      How long should the motor run for?<br>
+      How much thrust should it give?<br><br>
+      You can carry out your mission on <b>the moon</b>,
+      <b>Earth</b>, <b>Venus</b> or on <b>Mars</b>.<br>
+      Good luck!<br><br>
+      <a href="#info">Continue</a></p>
   </div>
-  <div id=selectpage class=page>
-    <h1>Choose a landing site</h1>
-    <div id=select-chooser>
-      <figure>
-        <a href="#main">
-          <img src=img/earth.jpg id=select-earth class=select-planet>
-        </a>
-        <figcaption>Earth</figcaption>
-      </figure>
-      <figure>
-        <a href="#main">
-          <img src=img/moon.jpg id=select-moon class=select-planet>
-        </a>
-        <figcaption>Moon</figcaption>
-      </figure>
-      <figure>
-        <a href="#main">
-          <img src=img/mars.jpg id=select-mars class=select-planet>
-        </a>
-        <figcaption>Mars</figcaption>
-      </figure>
-      <figure>
-        <a href="#main">
-          <img src=img/venus.jpg id=select-venus class=select-planet>
-        </a>
-        <figcaption>Venus</figcaption>
-      </figure>
-      <figure>
-        <a href="#main">
-          <img src=img/t-mars.png id=select-t-mars class=select-planet>
-        </a>
-        <figcaption>Terraformed Mars</figcaption>
-      </figure>
-    </div>
+  <img src="img/earth_panorama.jpg" id=intro-planet>
+</div>
+<div id=infopage class=page>
+  <div id=info-title-box>
+    <h1>Will It Land?</h1>
   </div>
-  <div id=mainpage class=page>
-    <div id=target></div>
-    <div id=main-settings>
-      <form onsubmit="return process_form(this)">
+  <div id=info-desc-box>
+    Help text/photos/educational material goes here.<br>
+    <a href="#select">Continue.</a>
+  </div>
+</div>
+<div id=selectpage class=page>
+  <h1>Choose a landing site</h1>
+  <div id=select-chooser>
+    <figure>
+      <a href="#main">
+        <img src=img/earth.jpg id=select-earth class=select-planet>
+      </a>
+      <figcaption>Earth</figcaption>
+    </figure>
+    <figure>
+      <a href="#main">
+        <img src=img/moon.jpg id=select-moon class=select-planet>
+      </a>
+      <figcaption>Moon</figcaption>
+    </figure>
+    <figure>
+      <a href="#main">
+        <img src=img/mars.jpg id=select-mars class=select-planet>
+      </a>
+      <figcaption>Mars</figcaption>
+    </figure>
+    <figure>
+      <a href="#main">
+        <img src=img/venus.jpg id=select-venus class=select-planet>
+      </a>
+      <figcaption>Venus</figcaption>
+    </figure>
+    <figure>
+      <a href="#main">
+        <img src=img/t-mars.png id=select-t-mars class=select-planet>
+      </a>
+      <figcaption>Terraformed Mars</figcaption>
+    </figure>
+  </div>
+</div>
+<div id=mainpage class=page>
+  <div id=target></div>
+  <div id=main-settings>
+    <form onsubmit="return process_form(this)">
       <h2>Planet</h2>
       <div id=site-picker class=picker></div>
-      <br><div class="div-label">Initial altitude:&nbsp;
+      <br><div class="div-label">Initial altitude (m):&nbsp;
       <input type="text" name="init_altitude" id="init_altitude"></div>
-      <br><div class="div-label">Initial velocity:&nbsp;
+      <br><div class="div-label">Initial velocity (m/s):&nbsp;
       <input type="text" name="init_velocity" id="init_velocity"></div>
-      <br><div class="div-label">Atmospheric density:&nbsp;
+      <br><div class="div-label">Atmospheric density (kgm<sup>-3</sup>):&nbsp;
       <input type="text" name="density" id="density"></div>
-      <br><div class="div-label">Gravity:&nbsp;
+      <br><div class="div-label">Gravity (N/kg):&nbsp;
       <input type="text" name="gravity" id="gravity"></div>
       <br>
       <h2>Rocket</h2>
@@ -95,10 +95,10 @@
       <input type="text" name="thrust" id="thrust"></div>
       <br><br>
       <input type="submit" value="Go!">
-      </form>
-      <div id=stats></div>
-    </div>
+    </form>
+    <div id=stats></div>
   </div>
+</div>
 </body>
 <script src="vls.js"></script>
 <script src="form.js"></script>
