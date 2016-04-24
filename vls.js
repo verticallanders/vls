@@ -91,7 +91,7 @@ var engine = Engine.create({
   render: {
     element: document.getElementById("target"),
     options: {
-      width: document.getElementById("target").clientWidth,
+      width: document.getElementById("target").clientWidth || 800,
       height: 600,
       background: '#000',
       hasBounds: true,
