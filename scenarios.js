@@ -12,7 +12,7 @@ var sites = {
   },
 
   Moon: {
-    rho: 0,
+    rho: 0.00000000001,
     g: 1.63,
     start_alt: 400,
     start_vel: 100,
@@ -60,7 +60,7 @@ var sites = {
   },
   
   "67P/Churyumov–Gerasimenko": {
-    rho: 0,
+    rho: 0.00000000001,
     g: 0.001,
     start_alt: 400,
     start_vel: 100,
