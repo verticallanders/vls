@@ -9,15 +9,6 @@ h2 {
     margin-bottom: 0;
 }
 
-.sidebar {
-    background: black;
-    position: absolute;
-    right: 0;
-    top: 10px;
-    bottom: 0;
-    width: 1000px;
-}
-
 .div-label {
     float: left;
     width: 100%;
@@ -29,8 +20,40 @@ input {
     color: #AAA;
 }
 
+.title {
+    width: 100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
 .planet-selector {
     width: 100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.left {
+    background: black;
+    color: white;
+    font-size: 16px;
+    display: block;
+    float: left;
+    box-sizing: border-box;
+    width: 48%;
+    margin: 0 2% 10px 0
+}
+
+.right {
+    background: black;
+    color: white;
+    font-size: 16px;
+    display: block;
+    float: right;
+    box-sizing: border-box;
+    width: 48%;
+    margin: 0 0 10px 2%
 }
 
 button {
