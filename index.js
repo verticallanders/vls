@@ -67,24 +67,27 @@ picker(document.getElementById("rocket-picker"), rockets, "Rocket");
 
 document.getElementById("select-earth").onclick = function(e) {
   Scenario.Site = sites.Earth;
+  populateForm(Scenario.Site);
 };
 document.getElementById("select-moon").onclick = function(e) {
   Scenario.Site = sites.Moon;
+  populateForm(Scenario.Site);
 };
 document.getElementById("select-mars").onclick = function(e) {
   Scenario.Site = sites.Mars;
+  populateForm(Scenario.Site);
 };
-
 document.getElementById("select-venus").onclick = function(e) {
   Scenario.Site = sites.Venus;
+  populateForm(Scenario.Site);
 };
-
 document.getElementById("select-t-mars").onclick = function(e) {
   Scenario.Site = sites["Terraformed Mars"];
+  populateForm(Scenario.Site);
 };
-
 document.getElementById("select-t-rosetta").onclick = function(e) {
   Scenario.Site = sites["67P/Churyumov–Gerasimenko"];
+  populateForm(Scenario.Site);
 };
 
 var helpers = document.getElementsByClassName("help");
