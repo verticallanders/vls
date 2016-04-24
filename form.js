@@ -5,6 +5,9 @@ document.getElementById("thrust").value = Scenario.Burn.thrust;
 document.getElementById("drag_coeff").value = Scenario.Rocket.Cd;
 document.getElementById("density").value = Scenario.Site.rho;
 document.getElementById("init_velocity").value = Scenario.Site.start_vel;
+document.getElementById("gravity").value = Scenario.Site.g;
+document.getElementById("init_altitude").value = Scenario.Site.start_alt;
+document.getElementById("mass").value = Scenario.Rocket.mass;
 
 var planets = {
   earth: {

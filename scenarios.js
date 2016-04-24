@@ -77,6 +77,7 @@ var rockets = {
     yOffset: 0,
   },
   
+  // to make this land use "Burn altitute: 220; Burn time: 1.3"
   "Falcon 9": {
     mass: 30000,
     area: Math.PI * 3.66,

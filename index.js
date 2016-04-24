@@ -114,4 +114,16 @@ document.getElementById("select-earth-help").onclick = function(e) {
   document.getElementById("help-earth").style.display = "block";
 };
 
+document.getElementById("label-initv").onclick = function(e) {
+  document.getElementById("help-initv").style.display = "block";
+};
+
+document.getElementById("label-atmo").onclick = function(e) {
+  document.getElementById("help-atmo").style.display = "block";
+};
+
+document.getElementById("label-drag").onclick = function(e) {
+  document.getElementById("help-drag").style.display = "block";
+};
+
 window.onhashchange = navigation;
